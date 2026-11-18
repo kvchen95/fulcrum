@@ -130,6 +130,17 @@ cd demo/entry && pnpm test         # resolve + e2e
   `fulcrum()` 与 `announce()` 会检测这个组合并自动改用轮询监听；自己配 vite 的话加
   `server: { watch: { usePolling: true } }`。
 
+## 发布
+
+```bash
+pnpm build && pnpm typecheck && pnpm test   # 发布物是 dist/，必须先编译
+pnpm release:pack                          # → release/*.tgz，先验货
+pnpm release                               # 按依赖顺序发布（entry-vite → sub-vite → cli）
+```
+
+注意 `pnpm pack` 是 **pnpm 的内置命令**，在仓库根执行打的是 private 根包（无用）。
+要打三个发布包用 `pnpm release:pack`，或进到单个包目录再 `pnpm pack`。
+
 ## License
 
 MIT

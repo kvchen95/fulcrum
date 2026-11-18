@@ -147,6 +147,17 @@ cd demo/entry && pnpm test         # resolve + e2e
   combination and switch to polling automatically; in hand-written vite configs add
   `server: { watch: { usePolling: true } }`.
 
+## Publishing
+
+```bash
+pnpm build && pnpm typecheck && pnpm test   # dist/ is what ships — build first
+pnpm release:pack                          # → release/*.tgz, inspect before publishing
+pnpm release                               # publishes in dependency order (entry-vite → sub-vite → cli)
+```
+
+`pnpm pack` is a **built-in pnpm command**: run from the repo root it packs the private root
+package, which is useless. Use `pnpm release:pack`, or `cd` into one package and run `pnpm pack`.
+
 ## License
 
 MIT
