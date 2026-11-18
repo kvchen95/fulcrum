@@ -229,4 +229,7 @@ manifest 里可用 `proxyTimeout` 单应用覆盖。
 - 产物是静态文件，`/child2/` 的深链要靠 `try_files`（`dist/nginx.conf` 已写好）
 - 端口被别的程序占用且恰好同 base 时可能误认，用 manifest 的 `port` 或 `pin: "remote"` 收窄
 - demo 子应用不各自装依赖：`vite` 从仓库根的 `node_modules` 解析（向上找 4 层）
+- **编辑器在 Windows、dev server 在 WSL 且项目在 `/mnt/*`（Windows 盘）时**，inotify 事件不生效，
+  改代码后任何端口都刷不出新内容。两个插件会自动检测这个组合并改用轮询监听
+  （`usePolling: true`）；自己写 vite.config 的话手动加 `server: { watch: { usePolling: true } }`
 - `apps/child`、`apps/child2` 的 `base` 必须与 manifest 一致，写错会拉到别人的 HTML

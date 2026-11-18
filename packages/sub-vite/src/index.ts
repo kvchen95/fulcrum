@@ -75,6 +75,11 @@ async function post(url: string, body: unknown, timeoutMs = 800): Promise<boolea
   }
 }
 
+/** WSL + Windows drive (/mnt/*): inotify never fires, so vite must poll for file changes */
+function needsPolling(root: string): boolean {
+  return Boolean(process.env.WSL_DISTRO_NAME) && /^\/mnt\//.test(root);
+}
+
 export interface AnnounceOptions {
   appName?: string;
   baseUrl?: string;
@@ -97,6 +102,14 @@ export function announce(opts: AnnounceOptions = {}): Plugin {
   return {
     name: 'fulcrum-sub',
     apply: 'serve',
+
+    config(userConfig) {
+      // 只在用户没有显式配置 watch 时兜底（编辑器与 dev server 跨文件系统是常见组合）
+      if (needsPolling(userConfig.root ?? process.cwd()) && userConfig.server?.watch?.usePolling === undefined) {
+        userConfig.server ??= {};
+        userConfig.server.watch = { ...userConfig.server.watch, usePolling: true, interval: 300 };
+      }
+    },
 
     configResolved(config: ResolvedConfig) {
       base = config.base || '/';

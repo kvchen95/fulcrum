@@ -14,6 +14,7 @@ import {
   localTargetFor,
   remoteTargetFor,
 } from '../dist/gateway.js';
+import { needsPolling } from '../dist/root.js';
 
 const HOST = { name: 'base', role: 'host', base: '/', port: 8000 };
 const REMOTE = (over = {}) => ({
@@ -209,4 +210,16 @@ test('generated proxy passes the self-check with all ws true', () => {
   assert.equal(Object.keys(proxy).length, 1);
   assert.equal(proxy['^/child/'].ws, true);
   assert.equal(proxy['^/child/'].target, 'http://127.0.0.1:7001');
+});
+
+
+test('WSL + /mnt/*（Windows 盘）必须自动改用轮询监听', () => {
+  const prev = process.env.WSL_DISTRO_NAME;
+  process.env.WSL_DISTRO_NAME = 'Ubuntu';
+  assert.equal(needsPolling('/mnt/d/code/fulcrum'), true);
+  assert.equal(needsPolling('/home/kovi/work/fulcrum'), false);
+  delete process.env.WSL_DISTRO_NAME;
+  // 没有 WSL 环境变量 = 原生 Windows/Linux，不需要轮询
+  assert.equal(needsPolling('/mnt/d/code/fulcrum'), false);
+  process.env.WSL_DISTRO_NAME = prev;
 });

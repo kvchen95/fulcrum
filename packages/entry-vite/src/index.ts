@@ -21,7 +21,7 @@
 import { resolve as resolvePath } from 'node:path';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { Plugin, ViteDevServer, PreviewServer } from 'vite';
-import { setRoot, projectRoot } from './root.js';
+import { setRoot, projectRoot, needsPolling, pollingWatch } from './root.js';
 import { loadManifest } from './manifest.js';
 import { createLocalWatcher, defaultArtifactRoot, type LocalWatcher } from './gateway.js';
 import { createMfProxy, type MfProxy } from './proxy.js';

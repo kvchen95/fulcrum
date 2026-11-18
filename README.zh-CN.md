@@ -123,6 +123,13 @@ pnpm test                          # entry-vite 单测
 cd demo/entry && pnpm test         # resolve + e2e
 ```
 
+## 已知边界
+
+- **WSL + Windows 盘组合**：项目放在 `/mnt/*`（Windows 盘）、dev server 跑在 WSL 里时，inotify 不生效，
+  改代码后所有端口都拿不到新内容（硬刷新也没用——是 vite 的转译缓存没失效，不是浏览器缓存）。
+  `fulcrum()` 与 `announce()` 会检测这个组合并自动改用轮询监听；自己配 vite 的话加
+  `server: { watch: { usePolling: true } }`。
+
 ## License
 
 MIT

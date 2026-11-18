@@ -139,6 +139,14 @@ pnpm test                          # entry-vite unit tests
 cd demo/entry && pnpm test         # resolve + e2e
 ```
 
+## Known boundary
+
+- **WSL + Windows drive**: with the project on `/mnt/*` and the dev server inside WSL, inotify
+  never fires — code changes don't reach any port, even after a hard refresh (vite's transform
+  cache never invalidates; it is not a browser cache). `fulcrum()` and `announce()` detect this
+  combination and switch to polling automatically; in hand-written vite configs add
+  `server: { watch: { usePolling: true } }`.
+
 ## License
 
 MIT
