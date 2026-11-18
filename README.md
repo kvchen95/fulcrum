@@ -20,6 +20,15 @@ fulcrum's answer: while debugging, no matter how many sub-apps on how many ports
 reached through one port; when building, no matter which repo a sub-app lives in, a single server
 path is enough to locate it.
 
+## Demo
+
+[![fulcrum demo: one host port, A running locally, B from its last build](./demo/demo-poster.jpg)](./demo/demo.mp4)
+
+25-second recording. Three things happen at once: the host listens on the single port `8000`;
+`child1` is started in its own directory and gets picked up immediately (its badge turns green —
+"local dev"); `child2` isn't running, so it is served from the artifact of its last build.
+Click the frame to play (mp4, 2.2 MB).
+
 ## Which package do I need
 
 | You are… | Install |
