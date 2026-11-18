@@ -1,6 +1,6 @@
 **English** · [简体中文](./README.zh-CN.md)
 
-# @fulcrum/sub-vite
+# fulcrum-sub-vite
 
 The **sub-app side** Vite plugin for micro-frontends (loader-agnostic: wujie / qiankun / micro-app). Two small plugins, one job each:
 
@@ -12,12 +12,12 @@ The **sub-app side** Vite plugin for micro-frontends (loader-agnostic: wujie / q
 The core rule: **if the host is unreachable, skip silently.** A sub-app must run fine standalone
 (`pnpm dev` with no host) and in CI (no host at all). "Couldn't notify" is never a failure.
 
-> Companion host-side plugin: [@fulcrum/entry-vite](../entry-vite/README.md)
+> Companion host-side plugin: [fulcrum-entry-vite](../entry-vite/README.md)
 
 ## Install
 
 ```bash
-pnpm add -D @fulcrum/sub-vite
+pnpm add -D fulcrum-sub-vite
 ```
 
 ## Quick start
@@ -26,7 +26,7 @@ pnpm add -D @fulcrum/sub-vite
 
 ```json
 {
-  "name": "@fulcrum/child-two",
+  "name": "child-two",
   "appName": "child2"
 }
 ```
@@ -34,7 +34,7 @@ pnpm add -D @fulcrum/sub-vite
 `appName` is the **micro-frontend id** and must equal the `name` field of that app in the host's
 manifest.
 
-Why not the package name: package names carry a scope (`@fulcrum/child-two`), change on release, and
+Why not the package name: package names carry a scope (`@scope/child-two`), change on release, and
 collide across private forks. `appName` is stable. You can omit it (it falls back to `name` with a
 warning), but declaring it is recommended.
 
@@ -43,7 +43,7 @@ warning), but declaring it is recommended.
 ```js
 // vite.config.js
 import { defineConfig } from 'vite';
-import { announce, artifactManifest } from '@fulcrum/sub-vite';
+import { announce, artifactManifest } from 'fulcrum-sub-vite';
 
 export default defineConfig({
   base: '/child2/',
@@ -54,7 +54,7 @@ export default defineConfig({
 Or both at once:
 
 ```js
-import allPlugins from '@fulcrum/sub-vite';
+import allPlugins from 'fulcrum-sub-vite';
 plugins: [allPlugins()];
 ```
 
@@ -101,7 +101,7 @@ longer buys nothing.
   "base": "/child2/",
   "builtAt": "2026-11-18T06:12:00.000Z",
   "commit": "a1b2c3d",
-  "name": "@fulcrum/child-two"
+  "name": "child-two"
 }
 ```
 

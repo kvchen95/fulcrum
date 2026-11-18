@@ -1,6 +1,6 @@
 **English** · [简体中文](./README.zh-CN.md)
 
-# @fulcrum/entry-vite
+# fulcrum-entry-vite
 
 A **host-side** Vite plugin for micro-frontends. **Loader-agnostic** — wujie, qiankun, micro-app or a hand-rolled iframe all work; it only decides *where a request goes*. One line to plug in, three problems solved:
 
@@ -8,7 +8,7 @@ A **host-side** Vite plugin for micro-frontends. **Loader-agnostic** — wujie, 
 2. **Three-tier fallback** — local dev server → last build's artifacts → test environment. Change one app, start one app
 3. **Same-origin forwarding** — the host only ever requests paths like `/child2/`, so no CORS and no environment branches inside components
 
-> Companion sub-app plugin: [@fulcrum/sub-vite](../sub-vite/README.md)
+> Companion sub-app plugin: [fulcrum-sub-vite](../sub-vite/README.md)
 
 ## Relationship to the loader (wujie / qiankun / …)
 
@@ -31,7 +31,7 @@ See [`demo/README.md`](../../demo/README.md).
 ## Install
 
 ```bash
-pnpm add -D @fulcrum/entry-vite
+pnpm add -D fulcrum-entry-vite
 ```
 
 `vite` is a peer dependency (>= 4) and is not installed twice.
@@ -41,7 +41,7 @@ pnpm add -D @fulcrum/entry-vite
 ```js
 // vite.config.js
 import { defineConfig } from 'vite';
-import { fulcrum } from '@fulcrum/entry-vite';
+import { fulcrum } from 'fulcrum-entry-vite';
 
 export default defineConfig({
   plugins: [fulcrum()],
@@ -76,10 +76,10 @@ pnpm dev
 ## CLI
 
 The plugin only answers "where should this request go". Running and shipping many apps at once is
-[`@fulcrum/cli`](../cli/README.md) (`fulcrum dev / build / preview / stop / check / mock-env`).
+[`fulcrum-toolchain`](../cli/README.md) (`fulcrum dev / build / preview / stop / check / mock-env`).
 
 Why split: the CLI needs manifest / gateway / artifact internals, but those must not become public
-API. The package exposes a single `@fulcrum/entry-vite/internal` subpath for the CLI; the plugin
+API. The package exposes a single `fulcrum-entry-vite/internal` subpath for the CLI; the plugin
 itself exports only `fulcrum()`.
 
 ## How it works
@@ -212,7 +212,7 @@ Two channels claim a running sub-app:
 
 | Channel | Trigger | Latency | Requirement |
 |---|---|---|---|
-| **announce** | Sub-app uses `@fulcrum/sub-vite`; posts on dev server start | instant | Sub-app imports the plugin |
+| **announce** | Sub-app uses `fulcrum-sub-vite`; posts on dev server start | instant | Sub-app imports the plugin |
 | **scan** | Every 2s: read listening ports → pid → `package.json` | ≤2s | none |
 
 The scan channel must pass three gates:
@@ -251,7 +251,7 @@ You do **not** need to write `artifact` in the manifest. The host resolves in th
 4. <artifactRoot>/<name> (whatever the host itself built)
 ```
 
-`fulcrum-artifact.json` is written by `artifactManifest()` from `@fulcrum/sub-vite`:
+`fulcrum-artifact.json` is written by `artifactManifest()` from `fulcrum-sub-vite`:
 
 ```json
 {
@@ -294,7 +294,7 @@ import {
   resolveArtifact,     // artifact resolution
   buildProxy,          // build a vite server.proxy shape (for validation)
   setRoot,             // set the project root
-} from '@fulcrum/entry-vite';
+} from 'fulcrum-entry-vite';
 ```
 
 See `src/index.ts` for the full export list.

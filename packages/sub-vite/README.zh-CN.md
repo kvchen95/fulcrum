@@ -1,6 +1,6 @@
 [English](./README.md) · **简体中文**
 
-# @fulcrum/sub-vite
+# fulcrum-sub-vite
 
 微前端**子应用侧**的 vite 插件（与加载器无关，wujie / qiankun / micro-app 通用）。两个小插件，各管一件事：
 
@@ -12,12 +12,12 @@
 核心约束：**拿不到底座时必须静默跳过**。子应用单独 `pnpm dev`（底座没起）、
 在 CI 里 build（底座不存在）都要正常跑完，不能因为"通知不了"就失败。
 
-> 配套的底座侧插件：[@fulcrum/entry-vite](../entry-vite/README.zh-CN.md)
+> 配套的底座侧插件：[fulcrum-entry-vite](../entry-vite/README.zh-CN.md)
 
 ## 安装
 
 ```bash
-pnpm add -D @fulcrum/sub-vite
+pnpm add -D fulcrum-sub-vite
 ```
 
 ## 快速开始
@@ -26,14 +26,14 @@ pnpm add -D @fulcrum/sub-vite
 
 ```json
 {
-  "name": "@fulcrum/child-two",
+  "name": "child-two",
   "appName": "child2"
 }
 ```
 
 `appName` 是**微前端侧的 id**，必须等于底座 manifest 里该应用的 `name`。
 
-为什么不用包名：包名带 scope（`@fulcrum/child-two`）、会随发布改名、私有 fork 可能重名，
+为什么不用包名：包名带 scope（`@scope/child-two`）、会随发布改名、私有 fork 可能重名，
 而 `appName` 是稳定的。不写也能用（会回退到 `name` 并打印提示），但推荐写。
 
 ### 2. 挂上插件
@@ -41,7 +41,7 @@ pnpm add -D @fulcrum/sub-vite
 ```js
 // vite.config.js
 import { defineConfig } from 'vite';
-import { announce, artifactManifest } from '@fulcrum/sub-vite';
+import { announce, artifactManifest } from 'fulcrum-sub-vite';
 
 export default defineConfig({
   base: '/child2/',
@@ -52,7 +52,7 @@ export default defineConfig({
 也可以一次挂两个：
 
 ```js
-import allPlugins from '@fulcrum/sub-vite';
+import allPlugins from 'fulcrum-sub-vite';
 plugins: [allPlugins()];
 ```
 
@@ -95,7 +95,7 @@ pnpm dev
   "base": "/child2/",
   "builtAt": "2026-11-18T06:12:00.000Z",
   "commit": "a1b2c3d",
-  "name": "@fulcrum/child-two"
+  "name": "child-two"
 }
 ```
 

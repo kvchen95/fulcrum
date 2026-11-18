@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { announce, artifactManifest } from '@fulcrum/sub-vite';
+import { announce, artifactManifest } from 'fulcrum-sub-vite';
 
 export default defineConfig({
   // base must match this app's entry in apps.manifest.json, or asset paths 404 / fetch someone else's HTML

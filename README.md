@@ -33,19 +33,19 @@ Click the frame to play (mp4, 2.2 MB).
 
 | You are… | Install |
 |---|---|
-| the host app | `@fulcrum/entry-vite` + `@fulcrum/cli` |
-| a remote app | `@fulcrum/sub-vite` |
+| the host app | `fulcrum-entry-vite` + `fulcrum-toolchain` |
+| a remote app | `fulcrum-sub-vite` |
 
 Loader-agnostic: this doesn't import wujie, qiankun, micro-app or anything else. It only decides
 *where the request goes*; the loader in your host page decides *how it mounts*.
 
 ```js
 // host vite.config.js
-import { fulcrum } from '@fulcrum/entry-vite';
+import { fulcrum } from 'fulcrum-entry-vite';
 export default { plugins: [fulcrum()] };
 
 // remote vite.config.js
-import { announce, artifactManifest } from '@fulcrum/sub-vite';
+import { announce, artifactManifest } from 'fulcrum-sub-vite';
 export default { plugins: [announce(), artifactManifest()] };
 ```
 ## Configuration
@@ -100,12 +100,12 @@ publish, and private forks can collide.
 
 ```json
 // remote package.json
-{ "name": "@fulcrum/child-two", "appName": "child2" }
+{ "name": "child-two", "appName": "child2" }
 ```
 
 ```js
 // remote vite.config.js — no port to hardcode; announce() reports it once the dev server is up
-import { announce, artifactManifest } from '@fulcrum/sub-vite';
+import { announce, artifactManifest } from 'fulcrum-sub-vite';
 export default { plugins: [announce(), artifactManifest()] };
 ```
 
@@ -127,9 +127,9 @@ Then `pnpm build` / `pnpm preview` / `pnpm check` from `demo/entry`.
 
 | Package | Docs |
 |---|---|
-| `@fulcrum/entry-vite` | [EN](./packages/entry-vite/README.md) · [中文](./packages/entry-vite/README.zh-CN.md) |
-| `@fulcrum/sub-vite` | [EN](./packages/sub-vite/README.md) · [中文](./packages/sub-vite/README.zh-CN.md) |
-| `@fulcrum/cli` | [EN](./packages/cli/README.md) · [中文](./packages/cli/README.zh-CN.md) |
+| `fulcrum-entry-vite` | [EN](./packages/entry-vite/README.md) · [中文](./packages/entry-vite/README.zh-CN.md) |
+| `fulcrum-sub-vite` | [EN](./packages/sub-vite/README.md) · [中文](./packages/sub-vite/README.zh-CN.md) |
+| `fulcrum-toolchain` | [EN](./packages/cli/README.md) · [中文](./packages/cli/README.zh-CN.md) |
 | demo | [中文](./demo/README.md) |
 
 ## Tests

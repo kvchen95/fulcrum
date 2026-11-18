@@ -1,12 +1,12 @@
 [简体中文](./README.zh-CN.md) · **English**
 
-# @fulcrum/cli
+# fulcrum-toolchain
 
 The command line for the micro-frontend workflow: start the host, spawn remotes, build the site,
 reap orphans, run the gates, fake a test environment.
 
 ```bash
-pnpm add -D @fulcrum/cli
+pnpm add -D fulcrum-toolchain
 ```
 
 This gives you the `fulcrum` command.
@@ -32,10 +32,10 @@ The CLI needs the entry plugin's internals: manifest parsing, three-tier target 
 manifests, port reverse lookup. Exporting each of those would freeze them into public API — rename
 an internal helper and you break semver.
 
-So `@fulcrum/entry-vite` opens exactly one door:
+So `fulcrum-entry-vite` opens exactly one door:
 
 ```js
-import { loadManifest, buildProxy, resolveArtifact } from '@fulcrum/entry-vite/internal';
+import { loadManifest, buildProxy, resolveArtifact } from 'fulcrum-entry-vite/internal';
 ```
 
 The door is labelled `internal`: the plugin is public API, these are implementation details. The CLI
@@ -43,7 +43,7 @@ depends on it as a separate package and both versions move together inside the m
 plugin keeps its clean boundary of exporting only `fulcrum()`.
 
 Two side benefits: people who only want the plugin don't get a CLI installed, and a global
-`pnpm add -g @fulcrum/cli` doesn't drag the plugin along.
+`pnpm add -g fulcrum-toolchain` doesn't drag the plugin along.
 
 ## What `dev` does
 

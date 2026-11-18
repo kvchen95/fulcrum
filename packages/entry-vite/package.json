@@ -1,5 +1,5 @@
 {
-  "name": "@fulcrum/entry-vite",
+  "name": "fulcrum-entry-vite",
   "version": "0.0.1",
   "type": "module",
   "description": "Host-side, loader-agnostic Vite plugin for micro-frontends: manifest injection + three-tier fallback forwarding + sub-app port discovery/announce",

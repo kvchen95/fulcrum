@@ -17,8 +17,8 @@
     "wujie": "^2.1.0"
   },
   "devDependencies": {
-    "@fulcrum/entry-vite": "workspace:*",
-    "@fulcrum/cli": "workspace:*",
+    "fulcrum-entry-vite": "workspace:*",
+    "fulcrum-toolchain": "workspace:*",
     "vite": "^5.4.21",
     "wujie": "^2.1.0"
   },

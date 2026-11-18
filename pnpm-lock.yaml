@@ -23,7 +23,7 @@ importers:
 
   demo/child1:
     devDependencies:
-      '@fulcrum/sub-vite':
+      fulcrum-sub-vite:
         specifier: workspace:*
         version: link:../../packages/sub-vite
       vite:
@@ -32,7 +32,7 @@ importers:
 
   demo/child2:
     devDependencies:
-      '@fulcrum/sub-vite':
+      fulcrum-sub-vite:
         specifier: workspace:*
         version: link:../../packages/sub-vite
       vite:
@@ -45,19 +45,19 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0
     devDependencies:
-      '@fulcrum/cli':
-        specifier: workspace:*
-        version: link:../../packages/cli
-      '@fulcrum/entry-vite':
+      fulcrum-entry-vite:
         specifier: workspace:*
         version: link:../../packages/entry-vite
+      fulcrum-toolchain:
+        specifier: workspace:*
+        version: link:../../packages/cli
       vite:
         specifier: ^5.4.21
         version: 5.4.21(@types/node@26.6.6)
 
   packages/cli:
     dependencies:
-      '@fulcrum/entry-vite':
+      fulcrum-entry-vite:
         specifier: workspace:*
         version: link:../entry-vite
     devDependencies:

@@ -1,5 +1,5 @@
 /**
- * internal — collection of internal modules for @fulcrum/cli.
+ * internal — collection of internal modules for fulcrum-toolchain.
  *
  * Why a separate subpath instead of exporting manifest / gateway / artifact / ports / discover
  * individually: that would freeze internal implementation into public API — changing one
@@ -8,7 +8,7 @@
  *   "The plugin is the public API; these are implementation details. The CLI needs them, so one
  *    gate is opened, but the sign on it says internal — outside code should not depend on it directly."
  *
- * Version coupling relies on the monorepo: @fulcrum/cli depends on entry-vite via workspace, released from the same repo at the same version.
+ * Version coupling relies on the monorepo: fulcrum-toolchain depends on entry-vite via workspace, released from the same repo at the same version.
  */
 export * from './manifest.js';
 export * from './gateway.js';

@@ -1,5 +1,5 @@
 /**
- * @fulcrum/sub-vite —— the single integration point on the sub-app side.
+ * fulcrum-sub-vite —— the single integration point on the sub-app side.
  *
  * Two plugins, each handling one thing:
  *

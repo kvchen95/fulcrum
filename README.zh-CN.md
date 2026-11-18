@@ -22,19 +22,19 @@ fulcrum 给出的答案是：调试时，无论多少个子应用开多少个端
 
 | 你是 | 装什么 |
 |---|---|
-| 底座应用 | `@fulcrum/entry-vite` + `@fulcrum/cli` |
-| 子应用 | `@fulcrum/sub-vite` |
+| 底座应用 | `fulcrum-entry-vite` + `fulcrum-toolchain` |
+| 子应用 | `fulcrum-sub-vite` |
 
 与加载器无关：不 import wujie、qiankun、micro-app 里的任何一个。它只管**请求该去哪**；
 底座页面里的加载器管**怎么挂载**。
 
 ```js
 // 底座 vite.config.js
-import { fulcrum } from '@fulcrum/entry-vite';
+import { fulcrum } from 'fulcrum-entry-vite';
 export default { plugins: [fulcrum()] };
 
 // 子应用 vite.config.js
-import { announce, artifactManifest } from '@fulcrum/sub-vite';
+import { announce, artifactManifest } from 'fulcrum-sub-vite';
 export default { plugins: [announce(), artifactManifest()] };
 ```
 ## 配置
@@ -86,12 +86,12 @@ export default { plugins: [announce(), artifactManifest()] };
 
 ```json
 // 子应用 package.json
-{ "name": "@fulcrum/child-two", "appName": "child2" }
+{ "name": "child-two", "appName": "child2" }
 ```
 
 ```js
 // 子应用 vite.config.js —— 端口不用写死，dev server 起来后自动上报给底座
-import { announce, artifactManifest } from '@fulcrum/sub-vite';
+import { announce, artifactManifest } from 'fulcrum-sub-vite';
 export default { plugins: [announce(), artifactManifest()] };
 ```
 
@@ -111,9 +111,9 @@ cd demo/child1 && pnpm dev          # 子应用 A，2s 内被认到
 
 | 包 | 文档 |
 |---|---|
-| `@fulcrum/entry-vite` | [中文](./packages/entry-vite/README.zh-CN.md) · [EN](./packages/entry-vite/README.md) |
-| `@fulcrum/sub-vite` | [中文](./packages/sub-vite/README.zh-CN.md) · [EN](./packages/sub-vite/README.md) |
-| `@fulcrum/cli` | [中文](./packages/cli/README.zh-CN.md) · [EN](./packages/cli/README.md) |
+| `fulcrum-entry-vite` | [中文](./packages/entry-vite/README.zh-CN.md) · [EN](./packages/entry-vite/README.md) |
+| `fulcrum-sub-vite` | [中文](./packages/sub-vite/README.zh-CN.md) · [EN](./packages/sub-vite/README.md) |
+| `fulcrum-toolchain` | [中文](./packages/cli/README.zh-CN.md) · [EN](./packages/cli/README.md) |
 | demo | [中文](./demo/README.md) |
 
 ## 测试

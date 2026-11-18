@@ -17,7 +17,7 @@ import { readFileSync, existsSync, rmSync, readdirSync, readlinkSync } from 'nod
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import net from 'node:net';
-import { loadManifest, setRoot } from '@fulcrum/entry-vite/internal';
+import { loadManifest, setRoot } from 'fulcrum-entry-vite/internal';
 
 const ROOT = resolve(process.cwd());
 setRoot(ROOT);

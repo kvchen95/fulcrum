@@ -21,7 +21,7 @@ import {
   remoteTargetFor,
   hasArtifact,
   artifactDirFor,
-} from '@fulcrum/entry-vite/internal';
+} from 'fulcrum-entry-vite/internal';
 
 const ROOT = resolve(process.cwd());
 setRoot(ROOT);

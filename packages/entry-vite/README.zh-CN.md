@@ -1,6 +1,6 @@
 [English](./README.md) · **简体中文**
 
-# @fulcrum/entry-vite
+# fulcrum-entry-vite
 
 微前端**底座侧**的 vite 插件。**与加载器无关**——wujie、qiankun、micro-app、甚至手写 iframe 都能用，它只管“请求该转发到哪”。一行接入，解决三件事：
 
@@ -8,7 +8,7 @@
 2. **三级回落**：本地 dev server → 上次打的包 → 测试环境，改一个只起一个
 3. **同源转发**：底座只请求 `/child2/` 这类同源路径，没有 CORS，组件里没有环境判断
 
-> 配套的子应用侧插件：[@fulcrum/sub-vite](../sub-vite/README.zh-CN.md)
+> 配套的子应用侧插件：[fulcrum-sub-vite](../sub-vite/README.zh-CN.md)
 
 ## 与加载器（wujie/qiankun/…）的关系
 
@@ -30,7 +30,7 @@
 ## 安装
 
 ```bash
-pnpm add -D @fulcrum/entry-vite
+pnpm add -D fulcrum-entry-vite
 ```
 
 `vite` 是 peer dependency（>= 4），不会重复安装。
@@ -40,7 +40,7 @@ pnpm add -D @fulcrum/entry-vite
 ```js
 // vite.config.js
 import { defineConfig } from 'vite';
-import { fulcrum } from '@fulcrum/entry-vite';
+import { fulcrum } from 'fulcrum-entry-vite';
 
 export default defineConfig({
   plugins: [fulcrum()],
@@ -75,10 +75,10 @@ pnpm dev
 ## 命令行
 
 插件只管"请求该转发到哪"；"多个应用一起跑、一起打包发版"这部分是独立的
-[`@fulcrum/cli`](../cli/README.zh-CN.md)（`fulcrum dev / build / preview / stop / check / mock-env`）。
+[`fulcrum-toolchain`](../cli/README.zh-CN.md)（`fulcrum dev / build / preview / stop / check / mock-env`）。
 
 为什么拆开：CLI 需要 manifest / gateway / artifact 这些内部实现，但它们不该变成公共 API。
-包里只开一个 `@fulcrum/entry-vite/internal` 子路径给 CLI 用，插件本身只有 `fulcrum()` 一个导出。
+包里只开一个 `fulcrum-entry-vite/internal` 子路径给 CLI 用，插件本身只有 `fulcrum()` 一个导出。
 
 ## 工作原理
 
@@ -206,7 +206,7 @@ const manifest = globalThis.__MF_MANIFEST__;  // ❌ define 只替换裸标识�
 
 | 通道 | 触发 | 延迟 | 前提 |
 |---|---|---|---|
-| **announce** | 子应用装了 `@fulcrum/sub-vite`，dev server 起来时 POST | 即时 | 子应用 import 插件 |
+| **announce** | 子应用装了 `fulcrum-sub-vite`，dev server 起来时 POST | 即时 | 子应用 import 插件 |
 | **扫描** | 每 2s 读本机 LISTEN 端口 → pid → `package.json` | ≤2s | 无 |
 
 扫描通道要过三关才算认领：
@@ -242,7 +242,7 @@ manifest 里**不用写** `artifact`。底座按下面顺序找，命中即止�
 4. <artifactRoot>/<name>（底座自己 build 出来的那份）
 ```
 
-产物目录里的 `fulcrum-artifact.json`（由 `@fulcrum/sub-vite` 的 `artifactManifest()` 写入）：
+产物目录里的 `fulcrum-artifact.json`（由 `fulcrum-sub-vite` 的 `artifactManifest()` 写入）：
 
 ```json
 {
@@ -285,7 +285,7 @@ import {
   resolveArtifact,     // 产物解析
   buildProxy,          // 生成 vite server.proxy 形状（校验用）
   setRoot,             // 指定项目根
-} from '@fulcrum/entry-vite';
+} from 'fulcrum-entry-vite';
 ```
 
 完整导出列表见 `src/index.ts`。

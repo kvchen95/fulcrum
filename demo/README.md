@@ -1,6 +1,6 @@
 # Fulcrum · 示例底座与调试骨架
 
-> 包本体在仓库根目录（`@fulcrum/entry-vite`）和 `sub/`（`@fulcrum/sub-vite`）。
+> 包本体在仓库根目录（`fulcrum-entry-vite`）和 `sub/`（`fulcrum-sub-vite`）。
 > 这个目录是**脚手架**：一个 wujie 基座、两个示例子应用、以及操作它们的 CLI。
 > 不发布，随便改。
 
@@ -25,7 +25,7 @@ demo 下只有三个文件夹：`entry` 是基座，`child` / `child2` 是子应
 清单在 `entry/` 里——因为 `entry` 是这个工作区的入口，cwd 从这里开始。
 
 **没有 `dev/` 目录**：那些脚本（起底座、打站点、收尸、校验、模拟测试环境）都跟微前端有关，
-跟"示例基座长什么样"无关，已经做成独立的 `@fulcrum/cli` 包：
+跟"示例基座长什么样"无关，已经做成独立的 `fulcrum-toolchain` 包：
 
 ```bash
 fulcrum dev | build | preview | stop | check | mock-env
@@ -34,14 +34,14 @@ fulcrum dev | build | preview | stop | check | mock-env
 demo 的 `package.json` 就是普通项目的样子，没有任何路径技巧：
 
 ```json
-"devDependencies": { "@fulcrum/entry-vite": "workspace:*", "@fulcrum/cli": "workspace:*" },
+"devDependencies": { "fulcrum-entry-vite": "workspace:*", "fulcrum-toolchain": "workspace:*" },
 "scripts": { "dev": "fulcrum dev", "build": "fulcrum build", "check": "fulcrum check" }
 ```
 
 `pnpm install` 之后 `fulcrum` 会被链到 `demo/entry/node_modules/.bin/fulcrum`，
 且三个包的 `prepare` 脚本会自动编译出 `dist/`（类型声明一起生成）。
-子应用同理：只装 `@fulcrum/sub-vite`，`vite.config.js` 里
-`import { announce, artifactManifest } from '@fulcrum/sub-vite'`。
+子应用同理：只装 `fulcrum-sub-vite`，`vite.config.js` 里
+`import { announce, artifactManifest } from 'fulcrum-sub-vite'`。
 
 包全部是 TypeScript；`entry/`、`child/`、`child2/` 里的示例应用仍用 .js ——
 它们是给人抄的模板，保持最短路径，且加载器（wujie）没有官方类型声明。
@@ -102,7 +102,7 @@ flowchart LR
 
 | 通道 | 触发 | 延迟 | 前提 |
 |---|---|---|---|
-| announce | 子应用装了 `@fulcrum/sub-vite` | 即时 | 子应用 import 插件 |
+| announce | 子应用装了 `fulcrum-sub-vite` | 即时 | 子应用 import 插件 |
 | 扫描 | 每 2s 读本机 LISTEN 端口 → pid → package.json | ≤2s | 无 |
 
 扫描要过三关才算认领：端口在 LISTEN → `appName` 匹配 → `GET {base}` 的 HTML 里确实带

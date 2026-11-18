@@ -8,7 +8,7 @@
     "build": "vite build"
   },
   "devDependencies": {
-    "@fulcrum/sub-vite": "workspace:*",
+    "fulcrum-sub-vite": "workspace:*",
     "vite": "^5.4.21"
   }
 }

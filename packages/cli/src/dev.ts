@@ -26,8 +26,8 @@ import {
   resolveArtifact,
   artifactAgeHours,
   describeAge,
-} from '@fulcrum/entry-vite/internal';
-import type { AppEntry, ResolvedArtifact } from '@fulcrum/entry-vite/internal';
+} from 'fulcrum-entry-vite/internal';
+import type { AppEntry, ResolvedArtifact } from 'fulcrum-entry-vite/internal';
 
 const ROOT = resolve(process.cwd());
 setRoot(ROOT);
@@ -378,7 +378,7 @@ console.log('─'.repeat(72));
 if (!wanted.size) {
   console.log('');
   console.log('[dev] no sub-apps spawned this run — run pnpm dev in the repo of each sub-app; the base picks up the port within 2s.');
-  console.log('[dev] sub-apps with @fulcrum/sub-vite announce themselves immediately, no scan wait needed.');
+  console.log('[dev] sub-apps with fulcrum-sub-vite announce themselves immediately, no scan wait needed.');
 }
 if (artifactApps.length && !process.argv.includes('--quiet')) {
   console.log(`[dev] ${artifactApps.length} app(s) fall back to the last build's artifacts (no test env needed, no server started).`);

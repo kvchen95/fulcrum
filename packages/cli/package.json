@@ -1,5 +1,5 @@
 {
-  "name": "@fulcrum/cli",
+  "name": "fulcrum-toolchain",
   "version": "0.0.1",
   "type": "module",
   "description": "Micro-frontend workflow CLI: start the base, build the site, reap orphans, run the gates, fake a test env.",
@@ -12,7 +12,7 @@
     "README.zh-CN.md"
   ],
   "dependencies": {
-    "@fulcrum/entry-vite": "workspace:*"
+    "fulcrum-entry-vite": "workspace:*"
   },
   "license": "MIT",
   "readme": "README.md",

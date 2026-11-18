@@ -1,5 +1,5 @@
 {
-  "name": "@fulcrum/sub-vite",
+  "name": "fulcrum-sub-vite",
   "version": "0.0.1",
   "type": "module",
   "description": "Sub-app side Vite plugins (loader-agnostic): announce the dev server port on startup, write an artifact manifest after build",

@@ -1,10 +1,10 @@
 /**
- * @fulcrum/entry-vite — the base project's single integration point.
+ * fulcrum-entry-vite — the base project's single integration point.
  *
  * Everything scattered across vite.config.js (manifest injection, three-level-fallback forwarding, port
  * discovery, the status endpoint, sub-app announce endpoints) is gathered into one vite plugin. A base project only needs:
  *
- *   import { fulcrum } from '@fulcrum/entry-vite';
+ *   import { fulcrum } from 'fulcrum-entry-vite';
  *   export default defineConfig({ plugins: [fulcrum()] });
  *
  * It does four things:
@@ -15,7 +15,7 @@
  *
  * All three usage forms come from this one code base, avoiding "plugin and CLI behave differently":
  *   - vite plugin (dev server / build)
- *   - CLI reuses pure functions via @fulcrum/entry-vite/internal
+ *   - CLI reuses pure functions via fulcrum-entry-vite/internal
  *   - unit tests import pure functions directly
  */
 import { resolve as resolvePath } from 'node:path';

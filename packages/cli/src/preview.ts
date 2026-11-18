@@ -14,7 +14,7 @@
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
 import { createReadStream, existsSync, statSync } from 'node:fs';
 import { resolve, extname, join, normalize } from 'node:path';
-import { loadManifest, setRoot } from '@fulcrum/entry-vite/internal';
+import { loadManifest, setRoot } from 'fulcrum-entry-vite/internal';
 
 const ROOT = resolve(process.cwd());
 setRoot(ROOT);

@@ -1,9 +1,9 @@
-# @fulcrum/cli
+# fulcrum-toolchain
 
 微前端工作流的命令行：起底座、代起子应用、打站点、收尸、校验、模拟测试环境。
 
 ```bash
-pnpm add -D @fulcrum/cli
+pnpm add -D fulcrum-toolchain
 ```
 
 装完得到 `fulcrum` 命令。
@@ -27,16 +27,16 @@ fulcrum mock-env <port> [dir]  # 起一个"测试环境"静态替身
 CLI 要用 entry 侧插件的内部实现（manifest 解析、三级回落目标计算、产物清单、端口反查）。
 如果把这些模块各自 `export` 出去，它们就被固化成公共 API——改个内部函数名就破坏 semver。
 
-所以 `@fulcrum/entry-vite` 只开一个门：
+所以 `fulcrum-entry-vite` 只开一个门：
 
 ```js
-import { loadManifest, buildProxy, resolveArtifact } from '@fulcrum/entry-vite/internal';
+import { loadManifest, buildProxy, resolveArtifact } from 'fulcrum-entry-vite/internal';
 ```
 
 门上的牌子写着 `internal`，语义是"插件是公开 API，这些是实现细节"。CLI 作为独立包依赖它，
 版本在同一个 monorepo 里联动发布；插件本身保持"只有 `fulcrum()` 一个导出"的干净边界。
 
-另一个好处：只想装插件的人不会被塞一个 CLI；想全局装 CLI（`pnpm add -g @fulcrum/cli`）也不用连插件一起装。
+另一个好处：只想装插件的人不会被塞一个 CLI；想全局装 CLI（`pnpm add -g fulcrum-toolchain`）也不用连插件一起装。
 
 ## `dev` 做了什么
 

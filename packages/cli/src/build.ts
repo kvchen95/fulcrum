@@ -28,7 +28,7 @@ import { build } from 'vite';
 import { rmSync, mkdirSync, writeFileSync, existsSync, statSync, readdirSync, cpSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { resolve, join } from 'node:path';
-import { loadManifest, setRoot, resolveArtifact, checkBaseMatch, artifactAgeHours, describeAge } from '@fulcrum/entry-vite/internal';
+import { loadManifest, setRoot, resolveArtifact, checkBaseMatch, artifactAgeHours, describeAge } from 'fulcrum-entry-vite/internal';
 
 const ROOT = resolve(process.cwd());
 setRoot(ROOT);
