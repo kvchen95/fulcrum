@@ -126,6 +126,19 @@ if (LOCAL.has('child1')) {
   const others = s.filter((_, i) => REMOTES[i] !== 'child1' && !SKIP.has(REMOTES[i]));
   check('其他应用未被牵连', others.every((x) => x.h3 && x.h3 !== marker), JSON.stringify(others));
   writeFileSync(HELLO, orig);
+  // 3b) Entry-level change: vite sends a full page reload inside the sandbox, which kills it.
+  // The host must auto-recover (refreshApp) so the developer never has to refresh the host page.
+  const MAIN = resolve(ROOT, '../child1/src/main.js');
+  const mainOrig = readFileSync(MAIN, 'utf8');
+  writeFileSync(MAIN, `${mainOrig}\nconsole.log('[e2e] entry change');`);
+  await sleep(7000); // full reload -> sandbox dies (1s poll) -> auto refreshApp
+  const health = await page.evaluate(() => (window.__mfHealth ? window.__mfHealth() : []));
+  const h1 = health.find((h) => h.name === 'child1');
+  check('entry change: sandbox auto-recovered without host refresh', h1?.state === 'alive', JSON.stringify(health));
+  s = await state();
+  check('recovered sandbox serves the current code', s.some((x) => x.id === 'child1' && !!x.h3), JSON.stringify(s));
+  writeFileSync(MAIN, mainOrig);
+  await sleep(2500);
 } else {
   console.log('  （child 不在本地，跳过）');
 }

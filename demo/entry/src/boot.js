@@ -12,7 +12,7 @@
  *   - all five apps (abcde) stay usable; only the ones you pick get HMR
  *
  * The other three features each map to one field-tested conclusion:
- *   - sandbox health check + one-click refreshApp (the §7.3 pitfall everyone hits)
+ *   - sandbox health check + automatic refreshApp recovery (the §7.3 pitfall everyone hits)
  *   - URL overrides (temporarily point at another port/machine locally, without polluting others)
  *   - a load failure only affects its own slot (§7.6)
  */
@@ -250,10 +250,26 @@ if (!IS_PROD) {
 
 // ---- sandbox health ----
 const names = started.map((t) => t.name);
-watchSandbox(names, (bad) => {
+watchSandbox(names, async (bad) => {
+  // Auto-recover instead of waiting for a human: a dead sandbox means every later edit is
+  // invisible until a manual host refresh — exactly the "must refresh to see changes" trap.
   healthEl.className = 'on';
-  healthEl.textContent = `沙箱失效：${bad.map((b) => b.name).join('、')}`;
-  recoverBtn.style.display = '';
+  healthEl.textContent = `沙箱失效，自动恢复中：${bad.map((b) => b.name).join('、')}`;
+  const targets = started.filter((t) => bad.some((b) => b.name === t.name));
+  try {
+    await recover(W, targets);
+  } catch (e) {
+    console.error('[boot] refreshApp 失败：', e);
+  }
+  const still = checkAll(names).filter((h) => h.state === 'missing');
+  if (still.length) {
+    healthEl.textContent = `沙箱自动恢复失败，点击手动重试：${still.map((x) => x.name).join('、')}`;
+    recoverBtn.style.display = '';
+  } else {
+    healthEl.className = '';
+    healthEl.textContent = '';
+    recoverBtn.style.display = 'none';
+  }
 });
 
 recoverBtn.addEventListener('click', async () => {
