@@ -1,0 +1,14 @@
+{
+  "name": "fulcrum-demo-child2",
+  "appName": "child2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@fulcrum/sub-vite": "workspace:*",
+    "vite": "^5.4.21"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "env": "dev",
+  "gateway": {
+    "host": "127.0.0.1",
+    "port": 8000
+  },
+  "apps": [
+    {
+      "name": "base",
+      "title": "底座",
+      "dir": ".",
+      "base": "/",
+      "port": 8000,
+      "role": "host"
+    },
+    {
+      "name": "child1",
+      "title": "子应用 A",
+      "dir": "../child1",
+      "base": "/child1/",
+      "port": 7001,
+      "role": "remote",
+      "remote": "http://127.0.0.1:7999",
+      "mode": "rebuild",
+      "enabled": true
+    },
+    {
+      "name": "child2",
+      "title": "子应用 B",
+      "dir": "../child2",
+      "base": "/child2/",
+      "port": 7002,
+      "role": "remote",
+      "remote": "http://127.0.0.1:7999",
+      "mode": "rebuild",
+      "enabled": true
+    }
+  ]
+}

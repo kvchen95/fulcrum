@@ -1,0 +1,40 @@
+{
+  "name": "@fulcrum/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Micro-frontend workflow CLI: start the base, build the site, reap orphans, run the gates, fake a test env.",
+  "bin": {
+    "fulcrum": "./dist/index.js"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "README.zh-CN.md"
+  ],
+  "dependencies": {
+    "@fulcrum/entry-vite": "workspace:*"
+  },
+  "license": "MIT",
+  "readme": "README.md",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepare": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kvchen95/fulcrum.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/kvchen95/fulcrum/issues"
+  },
+  "homepage": "https://github.com/kvchen95/fulcrum#readme"
+}

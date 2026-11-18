@@ -1,0 +1,50 @@
+{
+  "name": "@fulcrum/sub-vite",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Sub-app side Vite plugins (loader-agnostic): announce the dev server port on startup, write an artifact manifest after build",
+  "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "README.zh-CN.md"
+  ],
+  "peerDependencies": {
+    "vite": ">=4"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    }
+  },
+  "license": "MIT",
+  "readme": "README.md",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepare": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "vite": "^5.4.21"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kvchen95/fulcrum.git",
+    "directory": "packages/sub-vite"
+  },
+  "bugs": {
+    "url": "https://github.com/kvchen95/fulcrum/issues"
+  },
+  "homepage": "https://github.com/kvchen95/fulcrum#readme"
+}

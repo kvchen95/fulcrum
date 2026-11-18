@@ -1,0 +1,27 @@
+{
+  "name": "fulcrum",
+  "private": true,
+  "type": "module",
+  "description": "A minimal implementation of a register-and-discover mechanism for micro-frontends. Built around the lowest possible code intrusion, it forms a complete engineering workflow covering debugging, release and sub-app management.",
+  "scripts": {
+    "build": "pnpm -r --filter './packages/*' run build",
+    "typecheck": "pnpm -r --filter './packages/*' run typecheck",
+    "test": "pnpm -r --filter './packages/*' run build && node --test packages/entry-vite/tests/",
+    "check": "pnpm --filter fulcrum-demo-entry run check",
+    "e2e": "pnpm --filter fulcrum-demo-entry run test:e2e"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "playwright": "^1.48.0",
+    "typescript": "^7.0.2",
+    "vite": "^5.4.21"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kvchen95/fulcrum.git"
+  }
+}

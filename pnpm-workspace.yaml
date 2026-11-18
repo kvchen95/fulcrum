@@ -1,0 +1,12 @@
+# monorepo：三个可发布包 + 三个 demo 应用
+packages:
+  - 'packages/*'
+  - 'demo/entry'
+  - 'demo/child1'
+  - 'demo/child2'
+
+# pnpm 10+ 默认拦截依赖的构建脚本；esbuild 的 postinstall 被拦后 vite 起不来
+allowBuilds:
+  esbuild: true
+
+verifyDepsBeforeRun: false

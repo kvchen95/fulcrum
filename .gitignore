@@ -1,0 +1,20 @@
+# dependencies / build output
+node_modules/
+dist/
+*.tsbuildinfo
+
+# vite cache
+.vite/
+
+# runtime state (written by fulcrum dev/stop; never commit machine-local overrides)
+.mf-dev-local.json
+.dev-pids.json
+*.log
+
+# demo build output
+demo/*/dist/
+
+# editor / os
+.DS_Store
+Thumbs.db
+.idea/

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>底座 · Fulcrum</title>
+  <style>
+    :root { --gap: 12px; }
+    body { margin: 0; font: 14px/1.5 -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; }
+    header { padding: 10px 16px; border-bottom: 1px solid #ddd; display: flex; gap: var(--gap); align-items: center; }
+    header b { font-size: 15px; }
+    header .grow { flex: 1; }
+    main { display: grid; gap: var(--gap); padding: var(--gap); }
+    .slot { border: 1px solid #ccc; border-radius: 6px; min-height: 160px; position: relative; }
+    .slot > .label { position: absolute; top: 4px; right: 8px; font-size: 11px; color: #999; }
+    .not-started { display: grid; place-items: center; height: 100%; color: #888; font-size: 13px; }
+    button { font: inherit; padding: 3px 10px; border: 1px solid #bbb; border-radius: 4px; background: #fafafa; cursor: pointer; }
+    #health { font-size: 12px; color: #b45309; display: none; }
+    #health.on { display: block; }
+  </style>
+</head>
+<body>
+  <header>
+    <b>底座</b>
+    <span id="env"></span>
+    <span class="grow"></span>
+    <button id="toggles" title="开发态：切换子应用地址覆盖">地址覆盖</button>
+    <button id="recover" style="display:none">沙箱已失效，点此恢复</button>
+    <span id="health"></span>
+  </header>
+
+  <main id="stage"></main>
+
+  <script type="module" src="/src/boot.js"></script>
+</body>
+</html>
