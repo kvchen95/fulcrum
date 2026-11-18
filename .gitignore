@@ -14,6 +14,10 @@ dist/
 # demo build output
 demo/*/dist/
 
+# release tarballs (pnpm pack output)
+release/
+*.tgz
+
 # editor / os
 .DS_Store
 Thumbs.db

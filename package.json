@@ -8,7 +8,9 @@
     "typecheck": "pnpm -r --filter './packages/*' run typecheck",
     "test": "pnpm -r --filter './packages/*' run build && node --test packages/entry-vite/tests/",
     "check": "pnpm --filter fulcrum-demo-entry run check",
-    "e2e": "pnpm --filter fulcrum-demo-entry run test:e2e"
+    "e2e": "pnpm --filter fulcrum-demo-entry run test:e2e",
+    "pack": "pnpm -r --filter './packages/*' pack --pack-destination release",
+    "release": "pnpm -r --filter './packages/*' publish --access public --no-git-checks"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
@@ -23,5 +25,6 @@
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/kvchen95/fulcrum.git"
-  }
+  },
+  "version": "0.0.1"
 }

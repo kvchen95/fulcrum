@@ -1,6 +1,6 @@
 {
   "name": "@fulcrum/entry-vite",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "type": "module",
   "description": "Host-side, loader-agnostic Vite plugin for micro-frontends: manifest injection + three-tier fallback forwarding + sub-app port discovery/announce",
   "main": "dist/index.js",
@@ -50,5 +50,8 @@
   "bugs": {
     "url": "https://github.com/kvchen95/fulcrum/issues"
   },
-  "homepage": "https://github.com/kvchen95/fulcrum#readme"
+  "homepage": "https://github.com/kvchen95/fulcrum#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }
