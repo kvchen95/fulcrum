@@ -9,8 +9,9 @@
     "test": "pnpm -r --filter './packages/*' run build && node --test packages/entry-vite/tests/",
     "check": "pnpm --filter fulcrum-demo-entry run check",
     "e2e": "pnpm --filter fulcrum-demo-entry run test:e2e",
-    "release": "pnpm -r --filter './packages/*' publish --access public --no-git-checks",
-    "release:pack": "pnpm -r --filter './packages/*' pack --pack-destination release"
+    "release": "pnpm build && pnpm -r --filter './packages/*' publish --access public --no-git-checks",
+    "release:pack": "pnpm build && pnpm -r --filter './packages/*' pack --pack-destination release",
+    "postinstall": "pnpm -r --filter './packages/*' run build"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
